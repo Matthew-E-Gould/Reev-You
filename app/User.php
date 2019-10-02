@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function ratedGames(){
       return $this->hasMany(Rating::class);
     }
+
+    public function isFollowing(){
+      return $this->hasMany(Follow::class);
+    }
 }

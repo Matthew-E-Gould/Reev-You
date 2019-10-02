@@ -5,8 +5,8 @@
 $link = "/users/".strval($user->id)."/update";
 ?>
 
-<form method="POST" action={{ $link }}>
-  {{ csrf_field() }}
+<form method="POST" action={{ $link }} enctype="multipart/form-data">
+  @csrf
   <h1>Edit your profile</h1>
 
   <div class="input-group mb-3">

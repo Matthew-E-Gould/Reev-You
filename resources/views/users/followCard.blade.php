@@ -1,5 +1,5 @@
 <?php
-  $link = "/users/".strval($followedUser->following_id);
+  $link = "/users/".strval($followedUser->id);
 ?>
 
 <a href={{$link}}>

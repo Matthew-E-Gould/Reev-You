@@ -12,11 +12,13 @@ class GamesTableSeeder extends Seeder
    */
   public function run()
   {
+
     for($i = 0; $i < 3; $i++){
       Games::create([
         'title' => 'GAME '.strval($i),
         'description' => 'GAME DESCRIPTION HERE'
       ]);
     }
+    
   }
 }

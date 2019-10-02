@@ -3,7 +3,7 @@
 @section('content')
 <?php
 $user = $dataSet['user'];
-$followedUsers = $dataSet['userFollows'];
+//$followedUsers = $dataSet['userFollows'];
 $following = $dataSet['following'];
 ?>
 
@@ -58,7 +58,8 @@ $following = $dataSet['following'];
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      @foreach($followedUsers as $followedUser)
+      @foreach($user->isFollowing as $follows)
+        <?php $followedUser = $follows->following; ?>
         @include('users/followCard')
       @endforeach
     </blockquote>

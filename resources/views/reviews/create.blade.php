@@ -12,7 +12,7 @@
   {{ csrf_field() }}
   <h1>Write your review for {{ $game->title }}</h1>
 
-<input type="hidden" value="{{$game->id}}" name="game_id">
+<input type="hidden" value="{{ $game->id }}" name="game_id">
 <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
 
   <div class="input-group mb-3">

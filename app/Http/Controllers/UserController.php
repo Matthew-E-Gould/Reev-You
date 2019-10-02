@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+use File;
+
 use App\User;
 use App\Review;
 use App\Rating;
@@ -20,22 +25,16 @@ class UserController extends Controller
   }
 
   public function show(Request $request, User $user){
-    // getting who the user follows
-    $userFollows = Follow::query('follows')
-    ->join('users', 'follows.following_id', '=', 'users.id')
-    ->select('name', 'img_name', 'following_id')
-    ->where('follower_id', $user['id'])
-    ->get();
 
     $following = 0;
-    if (Auth::check()){
-      if (Auth::user()->id == $user['id']){
+    if (Auth::check()){ // if logged in
+      if (Auth::user()->id == $user['id']){ // if user is veiwing their own page
         $following = -1;
       }
       else {
         $following = Follow::query('follows')
         ->where([
-          ['follower_id', Auth::user()->id],
+          ['user_id', Auth::user()->id],
           ['following_id', $user['id']]
         ])
         ->count();
@@ -44,10 +43,8 @@ class UserController extends Controller
 
     $dataSet = [
       'user' => $user,
-      'userFollows' => $userFollows,
       'following' => $following
     ];
-    //return $userFollows;
     return view('users/show', compact('dataSet'));
   }
 
@@ -68,8 +65,8 @@ class UserController extends Controller
 
   public function update(Request $request, User $user){
     $usr = User::find($user->id);
-
-    if($request->hasFile('user_image')){
+    
+    if($request->user_image){
       $file = $request->file('user_image');
       $extension = $file->getClientOriginalExtension();
       $usr->img_name = 'user/'.strval($usr->id).'.'.$extension;
