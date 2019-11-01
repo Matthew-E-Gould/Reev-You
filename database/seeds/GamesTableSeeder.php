@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Games;
+use App\Game;
 
 class GamesTableSeeder extends Seeder
 {
@@ -14,11 +14,11 @@ class GamesTableSeeder extends Seeder
   {
 
     for($i = 0; $i < 3; $i++){
-      Games::create([
+      Game::create([
         'title' => 'GAME '.strval($i),
         'description' => 'GAME DESCRIPTION HERE'
       ]);
     }
-    
+
   }
 }
