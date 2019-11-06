@@ -22,13 +22,13 @@
 
 <p class="text-center">
   <div class="text-center">
-    <a href="/users">Users</a>
+    <a href={{route('users.index')}}>Users</a>
       |
-    <a href="/games">Games</a>
+    <a href={{route('games.index')}}>Games</a>
       |
-    <a href="/reviews">Reviews</a>
+    <a href={{route('reviews.index')}}>Reviews</a>
       |
-    <a href="/ratingDemo">Site Scores</a>
+    <a href={{route('demo')}}>Site Scores</a>
   </div>
 </p>
 

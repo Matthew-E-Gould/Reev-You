@@ -35,7 +35,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href={{route('home')}}>
                     Reev-You
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -46,16 +46,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item">
-                        <a id="navProfile" class="nav-link" href="/users">Users</a>
+                        <a id="navProfile" class="nav-link" href={{route('users.index')}}>Users</a>
                       </li>
                       <li class="nav-item">
-                        <a id="navGames" class="nav-link" href="/games">Games</a>
+                        <a id="navGames" class="nav-link" href={{route('games.index')}}>Games</a>
                       </li>
                       <li class="nav-item">
-                        <a id="navGames" class="nav-link" href="/reviews">Reviews</a>
+                        <a id="navGames" class="nav-link" href={{route('reviews.index')}}>Reviews</a>
                       </li>
                       <li class="nav-item">
-                        <a id="navSiteScore" class="nav-link" href="/ratingDemo">Site Scores</a>
+                        <a id="navSiteScore" class="nav-link" href={{route('demo')}}>Site Scores</a>
                       </li>
                     </ul>
 
@@ -73,7 +73,7 @@
                             @endif
                         @else
                           <li class="nav-item">
-                            <a class="nav-link" href={{'users/'.strval(Auth::user()->id)}}>Profile</a>
+                            <a class="nav-link" href={{ route('users.show', Auth::user()->id)}}>Profile</a>
                           </li>
                           <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}"

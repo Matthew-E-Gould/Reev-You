@@ -3,11 +3,10 @@
 @section('content')
 <?php
 $user = $dataSet['user'];
-//$followedUsers = $dataSet['userFollows'];
 $following = $dataSet['following'];
 ?>
 
-<div class="container-fluid row">
+<div class="container-fluid row" id="app">
 
 <!-- user display card -->
 <div class="card col-lg-3 col-sm-12">
@@ -16,8 +15,8 @@ $following = $dataSet['following'];
     <p class="card-text text-center">{{ $user->name }}</p>
 
     @if(Auth::check() && $user->id == Auth::user()->id)
-      <?php $link = '/users/'.strval(Auth::user()->id).'/edit' ?>
-      <button type="button" class="btn btn-success btn-block" onClick="location.href='<?= $link ?>'">Edit Profile</button>
+      <?php $link = route('users.edit', Auth::user()->id) ?>
+      <button type="button" class="btn btn-success btn-block" onClick="location.href='{{ $link }}'">Edit Profile</button>
     @elseif($following == 0 && Auth::check())
       <form method="POST" action="/follow/">
         @csrf
@@ -100,4 +99,19 @@ $following = $dataSet['following'];
 </div>
 
 </div>
+@endsection
+
+@section('vue-js')
+<script>
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    user: {!! $user !!}
+  },
+  computed: {},
+  methods: {}
+})
+
+</script>
 @endsection

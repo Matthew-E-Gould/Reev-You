@@ -58,24 +58,25 @@
 
 Route::get('/', function () {
     return view('homePage');
-});
+})
+  ->name('home');
 
 /////////////
 // users CRUD
-Route::get('users', 'UserController@index')
+Route::get('/users', 'UserController@index')
   ->name('users.index');
 
-Route::get('users/create', 'UserController@create')
+Route::get('/users/create', 'UserController@create')
   ->name('users.create');
 
-Route::get('users/{user}', 'UserController@show')
+Route::get('/users/{user}', 'UserController@show')
   ->name('users.show');
 
-Route::get('users/{user}/edit', 'UserController@edit')
+Route::get('/users/{user}/edit', 'UserController@edit')
   ->middleware('auth')
   ->name('users.edit');
 
-Route::post('users/{user}/update', 'UserController@update')
+Route::post('/users/{user}/update', 'UserController@update')
   ->middleware('auth')
   ->name('users.update');
 
@@ -86,7 +87,7 @@ Route::post('users/{user}/update', 'UserController@update')
 Route::get('/register', 'RegistrationController@create') // takes you to registration form
   ->name('register.create');
 
-Route::post('register', 'RegistrationController@store') // after form
+Route::post('/register', 'RegistrationController@store') // after form
   ->name('register.store');
 
 /////////////
@@ -112,8 +113,8 @@ Route::get('/games/create', 'GameController@create')
 
 ///////////////
 // reviews CRUD
-Route::get('/games', 'ReviewController@index')
-  ->name('games.index');
+Route::get('/reviews', 'ReviewController@index')
+  ->name('reviews.index');
 
 Route::get('/review/{game}', 'ReviewController@show') // takes you to review form
   ->name('games.show');
@@ -122,11 +123,11 @@ Route::get('/games/{game}/review', 'ReviewController@create') // takes you to re
   ->middleware('auth')
   ->name('reviews.create');
 
-Route::post('review/save', 'ReviewController@store') // after form
+Route::post('/review/save', 'ReviewController@store') // after form
   ->middleware('auth')
   ->name('reviews.store');
 
-Route::post('reviews/{review}/update', 'ReviewController@update')
+Route::post('/reviews/{review}/update', 'ReviewController@update')
   ->middleware('auth')
   ->name('reviews.update');
 
@@ -141,21 +142,21 @@ Route::post('reviews/{review}/update', 'ReviewController@update')
 
 /////////////////
 // Owned games CR
-Route::post('addgame/', 'OwnerController@create')
+Route::post('/addgame', 'OwnerController@create')
   ->middleware('auth')
   ->name('owner.create');
 
-Route::post('remgame/', 'OwnerController@destroy')
+Route::post('/remgame', 'OwnerController@destroy')
   ->middleware('auth')
   ->name('owner.destroy');
 
 /////////////
 // Follows CR
-Route::post('follow/', 'FollowController@create')
+Route::post('/follow', 'FollowController@create')
   ->middleware('auth')
   ->name('follow.create');
 
-Route::post('unfollow/', 'FollowController@destroy')
+Route::post('/unfollow', 'FollowController@destroy')
   ->middleware('auth')
   ->name('follow.destroy');
 
@@ -165,8 +166,8 @@ Auth::routes();
 
 ////////////////
 // Homepage Show
-Route::get('/', 'HomeController@index')
-  ->name('home');
+Route::get('/home', 'HomeController@index')
+  ->name('home2');
 
 //////////
 // ratings

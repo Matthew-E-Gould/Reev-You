@@ -25,14 +25,14 @@
 
 
 @section('vue-js')
-	<script>
-		var app = new Vue({
-	  	el: '#app',
-	  	data: {
-	    	review: {!! $review !!}
-	  	},
-			computed: {},
-			methods: {}
-		})
-	</script>
+<script>
+	var app = new Vue({
+  	el: '#app',
+  	data: {
+    	review: {!! $review !!}
+  	},
+		computed: {},
+		methods: {}
+	})
+</script>
 @endsection
