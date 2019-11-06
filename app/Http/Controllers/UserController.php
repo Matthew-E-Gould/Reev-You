@@ -24,6 +24,10 @@ class UserController extends Controller
     return view('users/index', compact('users'));
   }
 
+  public function create(){
+    return view('users/create');
+  }
+
   public function show(Request $request, User $user){
 
     $following = 0;
@@ -48,10 +52,6 @@ class UserController extends Controller
     return view('users/show', compact('dataSet'));
   }
 
-  public function create(){
-    return view('users/create');
-  }
-
   public function edit(Request $request, User $user){
     if (Auth::user()->id == $user['id']){
       $output = view('users/edit', compact('user'));
@@ -65,7 +65,7 @@ class UserController extends Controller
 
   public function update(Request $request, User $user){
     $usr = User::find($user->id);
-    
+
     if($request->user_image){
       $file = $request->file('user_image');
       $extension = $file->getClientOriginalExtension();
