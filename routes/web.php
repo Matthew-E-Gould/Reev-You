@@ -60,20 +60,51 @@ Route::get('/', function () {
     return view('homePage');
 });
 
-////////////////
-// profiles CRUD
-Route::post('users/{user}/update', 'UserController@update')->middleware('auth');
-Route::get('users/{user}/edit', 'UserController@edit')->middleware('auth');
-Route::resource('/users', 'UserController')->except(['edit', 'update']);
+/////////////
+// users CRUD
+Route::get('users', 'UserController@index')
+  ->name('users.index');
+
+Route::get('users/create', 'UserController@create')
+  ->name('users.create');
+
+Route::get('users/{user}', 'UserController@show')
+  ->name('users.show');
+
+Route::get('users/{user}/edit', 'UserController@edit')
+  ->middleware('auth')
+  ->name('users.edit');
+
+Route::post('users/{user}/update', 'UserController@update')
+  ->middleware('auth')
+  ->name('users.update');
+
+//destroy
 
 ////////////////
 // registration
-Route::get('/register', 'RegistrationController@create'); // takes you to registration form
-Route::post('register', 'RegistrationController@store'); // after form
+Route::get('/register', 'RegistrationController@create') // takes you to registration form
+  ->name('register.create');
+
+Route::post('register', 'RegistrationController@store') // after form
+  ->name('register.store');
 
 /////////////
 // games CRUD
-Route::post('/games/save', 'GameController@store')->middleware('auth');
+
+//index
+//create
+
+Route::post('/games/save', 'GameController@store')
+  ->middleware('auth')
+  ->name('games.store');
+
+//Show
+//edit
+//update
+//destroy
+
+
 Route::resource('/games', 'GameController');
 
 ///////////////
