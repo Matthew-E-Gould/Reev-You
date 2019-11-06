@@ -105,30 +105,59 @@ Route::post('/games/save', 'GameController@store')
 Route::get('/games/create', 'GameController@create')
   ->middleware('auth')
   ->name('games.create');
-//Show
+
 //edit
 //update
 //destroy
 
-
-Route::resource('/games', 'GameController');
-
 ///////////////
 // reviews CRUD
-Route::get('/games/{game}/review', 'ReviewController@create')->middleware('auth'); // takes you to review form
-Route::post('review/save', 'ReviewController@store')->middleware('auth'); // after form
-Route::post('reviews/{review}/update', 'ReviewController@update')->middleware('auth');
-Route::resource('/reviews', 'ReviewController');
+Route::get('/games', 'ReviewController@index')
+  ->name('games.index');
+
+Route::get('/review/{game}', 'ReviewController@show') // takes you to review form
+  ->name('games.show');
+
+Route::get('/games/{game}/review', 'ReviewController@create') // takes you to review form
+  ->middleware('auth')
+  ->name('reviews.create');
+
+Route::post('review/save', 'ReviewController@store') // after form
+  ->middleware('auth')
+  ->name('reviews.store');
+
+Route::post('reviews/{review}/update', 'ReviewController@update')
+  ->middleware('auth')
+  ->name('reviews.update');
+
+//index
+//store
+//update
+//create
+//show
+
+//edit
+//destroy
 
 /////////////////
 // Owned games CR
-Route::post('addgame/', 'OwnerController@create')->middleware('auth');
-Route::post('remgame/', 'OwnerController@destroy')->middleware('auth');
+Route::post('addgame/', 'OwnerController@create')
+  ->middleware('auth')
+  ->name('owner.create');
+
+Route::post('remgame/', 'OwnerController@destroy')
+  ->middleware('auth')
+  ->name('owner.destroy');
 
 /////////////
 // Follows CR
-Route::post('follow/', 'FollowController@create');
-Route::post('unfollow/', 'FollowController@destroy');
+Route::post('follow/', 'FollowController@create')
+  ->middleware('auth')
+  ->name('follow.create');
+
+Route::post('unfollow/', 'FollowController@destroy')
+  ->middleware('auth')
+  ->name('follow.destroy');
 
 /////////////////
 // Authentication
@@ -136,8 +165,10 @@ Auth::routes();
 
 ////////////////
 // Homepage Show
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')
+  ->name('home');
 
 //////////
 // ratings
-Route::get('/ratingDemo', 'RatingController@demo');
+Route::get('/ratingDemo', 'RatingController@demo')
+  ->name('demo');
