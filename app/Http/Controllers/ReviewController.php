@@ -21,7 +21,6 @@ class ReviewController extends Controller
 
   // models as singular form
   // linking data properly
-
   public function store(){
     $this->validate(request(), [
       'game_id' => '',
@@ -36,6 +35,7 @@ class ReviewController extends Controller
     return redirect()->to('/reviews');
   }
 
+  // creating a review of a specific game
   public function create(Request $request, Game $game){ // dont edit the Games $game
     return view('reviews/create', compact('game'));
   }
