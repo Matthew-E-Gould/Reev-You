@@ -86,6 +86,5 @@ class GameController extends Controller
 
   public function create(Request $request, Game $game){
     return view('games/new', compact('game'));
-    //return $request->game_image;
   }
 }

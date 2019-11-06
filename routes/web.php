@@ -92,13 +92,19 @@ Route::post('register', 'RegistrationController@store') // after form
 /////////////
 // games CRUD
 
-//index
-//create
+Route::get('/games', 'GameController@index')
+  ->name('games.index');
+
+Route::get('/games/{game}', 'GameController@show')
+  ->name('games.show');
 
 Route::post('/games/save', 'GameController@store')
   ->middleware('auth')
   ->name('games.store');
 
+Route::get('/games/create', 'GameController@create')
+  ->middleware('auth')
+  ->name('games.create');
 //Show
 //edit
 //update
