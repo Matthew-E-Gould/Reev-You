@@ -8,26 +8,28 @@ $following = $dataSet['following'];
 
 <div class="container-fluid row" id="app">
 
+@{{ user }}
+
 <!-- user display card -->
 <div class="card col-lg-3 col-sm-12">
-  <img src="{{asset('storage/'.strval($user->img_name))}}" class="card-img-top" alt="...">
+  <img src="{{ asset('storage/'.strval($user->img_name)) }}" class="card-img-top" alt="...">
   <div class="card-body">
-    <p class="card-text text-center">{{ $user->name }}</p>
+    <p class="card-text text-center">@{{ user.name }}</p>
 
     @if(Auth::check() && $user->id == Auth::user()->id)
       <?php $link = route('users.edit', Auth::user()->id) ?>
       <button type="button" class="btn btn-success btn-block" onClick="location.href='{{ $link }}'">Edit Profile</button>
     @elseif($following == 0 && Auth::check())
-      <form method="POST" action="/follow/">
+      <form method="POST" action={{ route('follow.create') }}>
         @csrf
-        <input type="hidden" value="{{$user->id}}" name="following_id">
+        <input type="hidden" value=@{{ user.id }} name="following_id">
         <input type="hidden" value="{{Auth::user()->id}}" name="follower_id">
         <p class="card-text"><button type="submit" class="btn btn-success btn-block">Follow User</button></p>
       </form>
     @elseif($following > 0 && Auth::check())
-      <form method="POST" action="/unfollow/">
+      <form method="POST" action={{ route('follow.destroy') }}>
         @csrf
-        <input type="hidden" value="{{$user->id}}" name="following_id">
+        <input type="hidden" value=@{{ user.id }} name="following_id">
         <input type="hidden" value="{{Auth::user()->id}}" name="follower_id">
         <p class="card-text"><button type="submit" class="btn btn-danger btn-block">Unfollow User</button></p>
       </form>
@@ -45,7 +47,7 @@ $following = $dataSet['following'];
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <p>{{ $user->bio }}</p>
+      <p>@{{ user.bio }}</p>
     </blockquote>
   </div>
 </div>
@@ -53,7 +55,7 @@ $following = $dataSet['following'];
 <!-- follow list -->
 <div class="card col-lg-3 col-sm-12">
   <div class="card-header text-center">
-    Who {{$user->name}} follows
+    Who @{{ user.name }} follows
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
@@ -73,7 +75,7 @@ $following = $dataSet['following'];
 <!-- review showcase -->
 <div class="card col-lg-9 col-sm-12">
   <div class="card-header text-center">
-    {{$user->name}}'s Review Showcase
+    @{{ user.name }}'s Review Showcase
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
@@ -89,7 +91,7 @@ $following = $dataSet['following'];
 <!-- rated games -->
 <div class="card col-lg-3 col-sm-12">
   <div class="card-header text-center">
-    {{$user->name}}'s Ratings
+    @{{ user.name }}'s Ratings
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
