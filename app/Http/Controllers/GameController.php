@@ -25,7 +25,7 @@ class GameController extends Controller
 
   public function show(Request $request, Game $game){
 
-    // working out how many reviews there are for the
+    // working out how many reviews there are for the current game
     $reviewCount = Review::query('reviews')
     ->where('game_id', $game['id'])
     ->count();
