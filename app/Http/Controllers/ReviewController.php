@@ -11,7 +11,14 @@ use App\User;
 class ReviewController extends Controller
 {
   public function index(Request $request){
-    $reviews = Review::query()->paginate(100); // padgination
+    clock()->startEvent('DB_read', 'DB read'); // starting timer for clockwork
+
+    //$reviews = Review::query()->paginate(100); // padgination
+    $reviews = Review::with('user', 'game')
+      ->paginate(100); // padgination with multiple eager load
+
+    clock()->endEvent('DB_read'); // ending timer
+
     return view('reviews/index', compact('reviews'));
   }
 
