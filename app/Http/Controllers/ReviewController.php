@@ -39,7 +39,8 @@ class ReviewController extends Controller
 
     $review = Review::create(request(['game_id', 'user_id', 'heading', 'content', 'recommend']));
 
-    return redirect()->to('/reviews');
+    return redirect()
+      ->route('reviews.index');
   }
 
   // creating a review of a specific game
@@ -64,6 +65,8 @@ class ReviewController extends Controller
     $rev->content = $request->content;
     $rev->recommend = $request->recommend;
     $rev->save();
-    return redirect()->to('/reviews');
+
+    return redirect()
+      ->route('reviews.index');
   }
 }

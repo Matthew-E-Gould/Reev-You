@@ -27,8 +27,8 @@ class GameController extends Controller
 
     // working out how many reviews there are for the current game
     $reviewCount = Review::query('reviews')
-    ->where('game_id', $game['id'])
-    ->count();
+      ->where('game_id', $game['id'])
+      ->count();
 
     // working out if the current user owns the game or not
     $owned = 0;
@@ -81,7 +81,9 @@ class GameController extends Controller
       Storage::disk('public')->put($game->img_name,  File::get($file)); // storing image to "public/storage/game/<filename>"
       $game->save(); // saving filename to database
     }
-    return redirect()->to('/games');
+    
+    return redirect()
+      ->route('games.index');
   }
 
   public function create(Request $request, Game $game){
